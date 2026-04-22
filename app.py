@@ -75,9 +75,9 @@ components.html(
             btn.innerHTML = '&#9776; Menu';
             btn.style.cssText = `
                 position: fixed;
-                top: 10px;
-                left: 10px;
-                z-index: 9999;
+                top: 14px;
+                left: 290px;
+                z-index: 1000000;
                 background: #2E7D5E;
                 color: #ffffff;
                 border: none;
@@ -88,7 +88,7 @@ components.html(
                 font-weight: 600;
                 cursor: pointer;
                 box-shadow: 0 2px 10px rgba(0,0,0,0.25);
-                transition: background 0.2s ease, transform 0.15s ease;
+                transition: background 0.2s ease, transform 0.15s ease, left 0.3s ease-in-out;
                 display: flex;
                 align-items: center;
                 gap: 6px;
@@ -136,12 +136,14 @@ components.html(
                 if (sidebar.firstElementChild) {
                     sidebar.firstElementChild.style.opacity = '1';
                 }
+                // Position button just outside the sidebar
+                btn.style.left = isMobile ? '10px' : '290px';
                 if (isMobile) {
                     sidebar.style.position = 'fixed';
                     sidebar.style.top      = '0';
                     sidebar.style.left     = '0';
                     sidebar.style.height   = '100vh';
-                    sidebar.style.zIndex   = '999';
+                    sidebar.style.zIndex   = '999999';
                     overlay.style.display  = 'block';
                     setTimeout(function(){ overlay.style.opacity = '1'; }, 10);
                 } else {
@@ -155,6 +157,8 @@ components.html(
                 if (sidebar.firstElementChild) {
                     sidebar.firstElementChild.style.opacity = '0';
                 }
+                // Move button to the left edge when sidebar is hidden
+                btn.style.left = '10px';
                 overlay.style.opacity = '0';
                 setTimeout(function(){ overlay.style.display = 'none'; }, 300);
             }
