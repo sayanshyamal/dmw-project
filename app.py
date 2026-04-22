@@ -351,7 +351,7 @@ if page == "🏠 Home / Overview":
         )
 
     with col_b:
-        st.markdown('<img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500" style="width:100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); object-fit: cover; margin-bottom: 1.5rem;" />', unsafe_allow_html=True)
+        st.markdown('<img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500" style="width:100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); object-fit: cover; margin-bottom: 1.5rem;" />', unsafe_allow_html=True)
         st.markdown('<div class="section-header" style="margin-top:0;">🔑 Key Findings</div>', unsafe_allow_html=True)
         st.markdown(
             """
@@ -517,26 +517,13 @@ elif page == "🔍 Data Insights":
 # PAGE 4 — CHARGE PREDICTOR
 # ===================================================================
 elif page == "🤖 Charge Predictor":
-    st.markdown(
-        """
-        <div style="display:flex; border-radius:12px; overflow:hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom:1.5rem; background: #1B5E40; height:160px;">
-            <div style="flex:1; display:flex; align-items:center; padding: 2rem;">
-                <h1 style="color:white !important; margin:0; font-size:2.2rem; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">AI-Powered<br>Insurance Charge Predictor</h1>
-            </div>
-            <div style="flex:1;">
-                <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?w=600" style="width:100%; height:100%; object-fit:cover; display:block;">
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    st.markdown("# 🤖 Insurance Charge Predictor")
     st.markdown("Enter patient details to get an instant prediction of medical insurance charges using our trained Linear Regression model.")
 
     left_col, right_col = st.columns([2, 3])
 
     with left_col:
         st.markdown('<div class="form-card"><h3>🩺 Enter Patient Details</h3>', unsafe_allow_html=True)
-        st.markdown('<img src="https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=400" style="width:100%; height:100px; object-fit:cover; border-radius:8px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />', unsafe_allow_html=True)
         age = st.slider("Age", 18, 80, 30, key="pred_age")
         sex = st.radio("Sex", ["Male", "Female"], horizontal=True, key="pred_sex")
         bmi = st.slider("BMI", 10.0, 55.0, 25.0, step=0.1, key="pred_bmi")
@@ -585,13 +572,10 @@ elif page == "🤖 Charge Predictor":
             # Risk label
             if prediction < 10000:
                 st.markdown('<div style="text-align:center"><span class="risk-low">🟢 Low Risk</span></div>', unsafe_allow_html=True)
-                st.markdown('<img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400" style="width:100%; height:150px; object-fit:cover; border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top:1rem;" />', unsafe_allow_html=True)
             elif prediction < 25000:
                 st.markdown('<div style="text-align:center"><span class="risk-medium">🟡 Medium Risk</span></div>', unsafe_allow_html=True)
-                st.markdown('<img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400" style="width:100%; height:150px; object-fit:cover; border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top:1rem;" />', unsafe_allow_html=True)
             else:
                 st.markdown('<div style="text-align:center"><span class="risk-high">🔴 High Risk</span></div>', unsafe_allow_html=True)
-                st.markdown('<img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400" style="width:100%; height:150px; object-fit:cover; border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top:1rem;" />', unsafe_allow_html=True)
 
             st.markdown("<br>", unsafe_allow_html=True)
 
