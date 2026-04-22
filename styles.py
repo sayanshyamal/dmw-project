@@ -24,8 +24,12 @@ def get_custom_css():
         font-weight: 600;
     }
 
-    .block-container .stRadio div[role="radiogroup"] label span,
-    .block-container .stCheckbox label span,
+    .block-container .stRadio div[role="radiogroup"] label,
+    .block-container .stRadio div[role="radiogroup"] label p,
+    .block-container .stRadio div[role="radiogroup"] label div,
+    .block-container .stCheckbox label,
+    .block-container .stCheckbox label p,
+    .block-container .stCheckbox label div,
     .block-container [data-baseweb="slider"] div {
         color: #374151 !important;
     }
