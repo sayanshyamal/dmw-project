@@ -355,7 +355,7 @@ if page == "🏠 Home / Overview":
         )
 
     with col_b:
-        st.markdown('<img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500" style="width:100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); object-fit: cover; margin-bottom: 1.5rem;" />', unsafe_allow_html=True)
+        st.markdown('<img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500" style="width:100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); object-fit: cover; margin-bottom: 1.5rem;" />', unsafe_allow_html=True)
         st.markdown('<div class="section-header" style="margin-top:0;">🔑 Key Findings</div>', unsafe_allow_html=True)
         st.markdown(
             """
