@@ -12,7 +12,7 @@ def get_custom_css():
     }
 
     /* Ensure text is visible even if Streamlit is in dark mode */
-    .stMarkdown p, .stMarkdown li, .stMarkdown span {
+    .stMarkdown p, .stMarkdown li {
         color: #374151 !important;
     }
 
