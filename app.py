@@ -13,6 +13,7 @@ from sklearn.metrics import r2_score
 
 from styles import get_custom_css
 import charts
+import streamlit.components.v1 as components
 
 # ===================================================================
 # PAGE CONFIG (must be first Streamlit command)
@@ -25,42 +26,168 @@ st.set_page_config(
 )
 
 # ===================================================================
-# LOCK SIDEBAR OPEN & HIDE COLLAPSE BUTTON
+# HAMBURGER MENU TOGGLE & SIDEBAR CONTROL
 # ===================================================================
 st.markdown(
     """
     <style>
-    /* Hide the sidebar collapse arrow button */
+    /* Hide Streamlit's default collapse arrow button */
     [data-testid="collapsedControl"] {
         display: none !important;
     }
 
-    /* Force sidebar to always stay open — desktop & mobile */
+    /* Smooth transition on sidebar */
     [data-testid="stSidebar"] {
-        min-width: 280px !important;
-        max-width: 280px !important;
-        transform: none !important;
-        position: relative !important;
-        visibility: visible !important;
+        transition: margin-left 0.3s ease-in-out,
+                    min-width 0.3s ease-in-out,
+                    max-width 0.3s ease-in-out,
+                    transform 0.3s ease-in-out !important;
     }
 
-    /* Ensure sidebar inner content is always visible */
+    /* Prevent content flash inside sidebar during transition */
     [data-testid="stSidebar"] > div:first-child {
-        width: 280px !important;
-    }
-
-    /* Mobile override — prevent sidebar from hiding */
-    @media (max-width: 768px) {
-        [data-testid="stSidebar"] {
-            min-width: 280px !important;
-            max-width: 280px !important;
-            transform: none !important;
-            z-index: 999 !important;
-        }
+        transition: opacity 0.2s ease-in-out !important;
     }
     </style>
     """,
     unsafe_allow_html=True,
+)
+
+# --- Inject JavaScript toggle system via components.html ---
+components.html(
+    """
+    <script>
+    (function() {
+        const doc = window.parent.document;
+        const sidebar = doc.querySelector('[data-testid="stSidebar"]');
+        if (!sidebar) return;
+
+        // ── Persistent state on the parent window ──
+        if (typeof window.parent._sidebarOpen === 'undefined') {
+            window.parent._sidebarOpen = window.parent.innerWidth >= 768;
+        }
+
+        // ── Create hamburger button (once) ──
+        let btn = doc.getElementById('hamburger-toggle-btn');
+        if (!btn) {
+            btn = doc.createElement('button');
+            btn.id = 'hamburger-toggle-btn';
+            btn.innerHTML = '&#9776; Menu';
+            btn.style.cssText = `
+                position: fixed;
+                top: 10px;
+                left: 10px;
+                z-index: 9999;
+                background: #2E7D5E;
+                color: #ffffff;
+                border: none;
+                border-radius: 8px;
+                padding: 8px 14px;
+                font-size: 18px;
+                font-family: 'Segoe UI', sans-serif;
+                font-weight: 600;
+                cursor: pointer;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+                transition: background 0.2s ease, transform 0.15s ease;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                user-select: none;
+            `;
+            btn.addEventListener('mouseenter', function() {
+                this.style.background = '#245f49';
+                this.style.transform = 'scale(1.05)';
+            });
+            btn.addEventListener('mouseleave', function() {
+                this.style.background = '#2E7D5E';
+                this.style.transform = 'scale(1)';
+            });
+            doc.body.appendChild(btn);
+        }
+
+        // ── Create mobile overlay (once) ──
+        let overlay = doc.getElementById('sidebar-overlay');
+        if (!overlay) {
+            overlay = doc.createElement('div');
+            overlay.id = 'sidebar-overlay';
+            overlay.style.cssText = `
+                display: none;
+                position: fixed;
+                top: 0; left: 0;
+                width: 100vw; height: 100vh;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 998;
+                transition: opacity 0.3s ease-in-out;
+            `;
+            doc.body.appendChild(overlay);
+        }
+
+        // ── Apply sidebar state ──
+        function updateSidebar() {
+            const isMobile = window.parent.innerWidth < 768;
+            const isOpen   = window.parent._sidebarOpen;
+
+            if (isOpen) {
+                sidebar.style.minWidth   = '280px';
+                sidebar.style.maxWidth   = '280px';
+                sidebar.style.transform  = 'translateX(0)';
+                sidebar.style.visibility = 'visible';
+                sidebar.style.overflow   = 'auto';
+                if (sidebar.firstElementChild) {
+                    sidebar.firstElementChild.style.opacity = '1';
+                }
+                if (isMobile) {
+                    sidebar.style.position = 'fixed';
+                    sidebar.style.top      = '0';
+                    sidebar.style.left     = '0';
+                    sidebar.style.height   = '100vh';
+                    sidebar.style.zIndex   = '999';
+                    overlay.style.display  = 'block';
+                    setTimeout(function(){ overlay.style.opacity = '1'; }, 10);
+                } else {
+                    overlay.style.display = 'none';
+                }
+            } else {
+                sidebar.style.minWidth   = '0px';
+                sidebar.style.maxWidth   = '0px';
+                sidebar.style.transform  = 'translateX(-280px)';
+                sidebar.style.overflow   = 'hidden';
+                if (sidebar.firstElementChild) {
+                    sidebar.firstElementChild.style.opacity = '0';
+                }
+                overlay.style.opacity = '0';
+                setTimeout(function(){ overlay.style.display = 'none'; }, 300);
+            }
+        }
+
+        // ── Click handlers ──
+        btn.onclick = function() {
+            window.parent._sidebarOpen = !window.parent._sidebarOpen;
+            updateSidebar();
+        };
+
+        overlay.onclick = function() {
+            window.parent._sidebarOpen = false;
+            updateSidebar();
+        };
+
+        // ── Handle window resize (auto-close on mobile, auto-open on desktop) ──
+        window.parent.removeEventListener('resize', window.parent._sidebarResizeHandler);
+        window.parent._sidebarResizeHandler = function() {
+            const isMobile = window.parent.innerWidth < 768;
+            if (isMobile && window.parent._sidebarOpen) {
+                window.parent._sidebarOpen = false;
+                updateSidebar();
+            }
+        };
+        window.parent.addEventListener('resize', window.parent._sidebarResizeHandler);
+
+        // ── Initial render ──
+        updateSidebar();
+    })();
+    </script>
+    """,
+    height=0,
 )
 
 # ===================================================================
