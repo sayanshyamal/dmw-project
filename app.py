@@ -136,8 +136,13 @@ components.html(
                 if (sidebar.firstElementChild) {
                     sidebar.firstElementChild.style.opacity = '1';
                 }
-                // Position button just outside the sidebar
-                btn.style.left = isMobile ? '10px' : '290px';
+                
+                // Change text to 'Close' when open
+                btn.innerHTML = '&#10006; Close';
+                
+                // Position button just outside the sidebar for desktop, inside for mobile
+                btn.style.left = isMobile ? '200px' : '290px';
+                
                 if (isMobile) {
                     sidebar.style.position = 'fixed';
                     sidebar.style.top      = '0';
@@ -157,6 +162,10 @@ components.html(
                 if (sidebar.firstElementChild) {
                     sidebar.firstElementChild.style.opacity = '0';
                 }
+                
+                // Revert text to 'Menu' when closed
+                btn.innerHTML = '&#9776; Menu';
+                
                 // Move button to the left edge when sidebar is hidden
                 btn.style.left = '10px';
                 overlay.style.opacity = '0';

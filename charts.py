@@ -82,7 +82,9 @@ def correlation_heatmap(df):
         text=np.round(corr.values, 2), texttemplate='%{text}', textfont=dict(size=14),
         hovertemplate='%{x} vs %{y}: %{z:.2f}<extra></extra>'
     ))
-    return _apply_layout(fig, 'Correlation Heatmap', 450)
+    fig = _apply_layout(fig, 'Correlation Heatmap', 450)
+    fig.update_layout(margin=dict(l=70, r=20, t=50, b=70))
+    return fig
 
 
 def region_smoker_bar(df):

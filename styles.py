@@ -11,6 +11,12 @@ def get_custom_css():
         font-family: 'Inter', 'Segoe UI', sans-serif;
     }
 
+    /* Add padding so the menu button doesn't overlap content */
+    .block-container {
+        padding-top: 4.5rem !important;
+        padding-bottom: 5rem !important;
+    }
+
     /* Hide default Streamlit header/footer */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
@@ -274,6 +280,64 @@ def get_custom_css():
         border-radius: 8px 8px 0 0;
         padding: 0.5rem 1.5rem;
         font-weight: 600;
+    }
+
+    /* ===== MOBILE MEDIA QUERIES ===== */
+    @media (max-width: 768px) {
+        .block-container {
+            padding-top: 4.5rem !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+            padding-bottom: 6rem !important;
+        }
+        .hero-banner {
+            padding: 2rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .hero-banner h1 {
+            font-size: 1.8rem;
+        }
+        .hero-banner p {
+            font-size: 1rem;
+        }
+        .kpi-card {
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .kpi-value {
+            font-size: 1.4rem;
+        }
+        .section-header {
+            font-size: 1.1rem;
+            padding: 0.6rem 1rem;
+            margin: 1.5rem 0 0.8rem 0;
+        }
+        .insight-card {
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .prediction-card {
+            padding: 1.5rem;
+        }
+        .prediction-card .charge-value {
+            font-size: 2rem;
+        }
+        .form-card {
+            padding: 1.2rem;
+        }
+        .styled-table {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .styled-table thead th, .styled-table tbody td {
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+        /* Adjust plotly chart containers on mobile if needed */
+        [data-testid="stPlotlyChart"] {
+            margin-bottom: 1rem;
+        }
     }
     </style>
     """
