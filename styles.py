@@ -11,6 +11,11 @@ def get_custom_css():
         font-family: 'Inter', 'Segoe UI', sans-serif;
     }
 
+    /* Ensure text is visible even if Streamlit is in dark mode */
+    .stMarkdown p, .stMarkdown li, .stMarkdown span {
+        color: #374151 !important;
+    }
+
     /* Add padding so the menu button doesn't overlap content */
     .block-container {
         padding-top: 4.5rem !important;
@@ -89,7 +94,7 @@ def get_custom_css():
         z-index: 1;
     }
     .hero-banner p {
-        color: rgba(255,255,255,0.9);
+        color: rgba(255,255,255,0.9) !important;
         font-size: 1.15rem;
         font-weight: 300;
         position: relative;

@@ -200,7 +200,7 @@ components.html(
     })();
     </script>
     """,
-    height=0,
+    height=1,
 )
 
 # ===================================================================
@@ -329,6 +329,10 @@ if page == "🏠 Home / Overview":
             dataset, we explore how factors like **age**, **BMI**, **smoking status**, and
             **region** influence insurance costs. A trained **Linear Regression** model allows
             users to predict their own insurance charges interactively.
+            
+            **Our Objective:** We aim to empower users with transparent insights into healthcare
+            costs and provide a reliable tool for estimating future medical expenses based on 
+            personal health profiles.
             """
         )
 
