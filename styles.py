@@ -16,6 +16,52 @@ def get_custom_css():
         color: #374151 !important;
     }
 
+    /* Fix Streamlit widgets, labels, and elements text color for light background */
+    .block-container label,
+    .block-container [data-testid="stWidgetLabel"] p,
+    .block-container [data-testid="stWidgetLabel"] span {
+        color: #1B5E40 !important;
+        font-weight: 600;
+    }
+
+    .block-container .stRadio div[role="radiogroup"] label span,
+    .block-container .stCheckbox label span,
+    .block-container [data-baseweb="slider"] div {
+        color: #374151 !important;
+    }
+
+    .block-container [data-baseweb="select"] > div {
+        background-color: white !important;
+    }
+    .block-container [data-baseweb="select"] div {
+        color: #374151 !important;
+    }
+    .block-container [data-baseweb="popover"] div {
+        background-color: white !important;
+        color: #374151 !important;
+    }
+
+    [data-testid="stAlert"] {
+        background-color: white !important;
+        border: 1px solid #C8E6C9 !important;
+    }
+    [data-testid="stAlert"] p, [data-testid="stAlert"] span {
+        color: #1B5E40 !important;
+    }
+
+    .stTabs [data-baseweb="tab"] p, .stTabs [data-baseweb="tab"] span {
+        color: #1B5E40 !important;
+    }
+    .stTabs [data-baseweb="tab"][aria-selected="true"] p,
+    .stTabs [data-baseweb="tab"][aria-selected="true"] span {
+        color: #2E7D5E !important;
+        font-weight: 700 !important;
+    }
+
+    .insight-card, .form-card, .styled-table, [data-testid="stDataFrame"] {
+        color: #374151 !important;
+    }
+
     /* Add padding so the menu button doesn't overlap content */
     .block-container {
         padding-top: 4.5rem !important;
