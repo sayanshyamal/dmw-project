@@ -25,6 +25,45 @@ st.set_page_config(
 )
 
 # ===================================================================
+# LOCK SIDEBAR OPEN & HIDE COLLAPSE BUTTON
+# ===================================================================
+st.markdown(
+    """
+    <style>
+    /* Hide the sidebar collapse arrow button */
+    [data-testid="collapsedControl"] {
+        display: none !important;
+    }
+
+    /* Force sidebar to always stay open — desktop & mobile */
+    [data-testid="stSidebar"] {
+        min-width: 280px !important;
+        max-width: 280px !important;
+        transform: none !important;
+        position: relative !important;
+        visibility: visible !important;
+    }
+
+    /* Ensure sidebar inner content is always visible */
+    [data-testid="stSidebar"] > div:first-child {
+        width: 280px !important;
+    }
+
+    /* Mobile override — prevent sidebar from hiding */
+    @media (max-width: 768px) {
+        [data-testid="stSidebar"] {
+            min-width: 280px !important;
+            max-width: 280px !important;
+            transform: none !important;
+            z-index: 999 !important;
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+# ===================================================================
 # INJECT CUSTOM CSS
 # ===================================================================
 st.markdown(get_custom_css(), unsafe_allow_html=True)
