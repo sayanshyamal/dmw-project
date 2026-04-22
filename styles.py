@@ -44,6 +44,10 @@ def get_custom_css():
     section[data-testid="stSidebar"] hr {
         border-color: rgba(255,255,255,0.2);
     }
+    
+    section[data-testid="stSidebar"] img {
+        border-radius: 0 0 12px 12px;
+    }
 
     /* ===== HEADINGS ===== */
     h1, h2, h3, h4 {
@@ -53,7 +57,7 @@ def get_custom_css():
 
     /* ===== HERO BANNER ===== */
     .hero-banner {
-        background: linear-gradient(135deg, #2E7D5E 0%, #1B5E40 50%, #145234 100%);
+        background: linear-gradient(rgba(30,90,60,0.82), rgba(30,90,60,0.82)), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1400') center/cover no-repeat;
         padding: 3rem 2.5rem;
         border-radius: 16px;
         margin-bottom: 2rem;

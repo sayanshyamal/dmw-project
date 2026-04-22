@@ -264,6 +264,7 @@ def fmt_inr_int(val):
 # SIDEBAR NAVIGATION
 # ===================================================================
 with st.sidebar:
+    st.image("https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=300", use_container_width=True)
     st.markdown("## 🏥 MediCharge Analytics")
     st.markdown("##### Insurance Cost Predictor & Analyzer")
     st.markdown("---")
@@ -307,13 +308,13 @@ if page == "🏠 Home / Overview":
 
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        st.markdown(f"""<div class="kpi-card"><div class="kpi-label">Total Records</div><div class="kpi-value">{total:,}</div></div>""", unsafe_allow_html=True)
+        st.markdown(f"""<div class="kpi-card"><div style="font-size:40px; margin-bottom:10px;">🏥</div><div class="kpi-label">Total Records</div><div class="kpi-value">{total:,}</div></div>""", unsafe_allow_html=True)
     with c2:
-        st.markdown(f"""<div class="kpi-card"><div class="kpi-label">Average Charge</div><div class="kpi-value">{fmt_inr_int(avg_charge)}</div></div>""", unsafe_allow_html=True)
+        st.markdown(f"""<div class="kpi-card"><div style="font-size:40px; margin-bottom:10px;">💰</div><div class="kpi-label">Average Charge</div><div class="kpi-value">{fmt_inr_int(avg_charge)}</div></div>""", unsafe_allow_html=True)
     with c3:
-        st.markdown(f"""<div class="kpi-card"><div class="kpi-label">Highest Charge</div><div class="kpi-value">{fmt_inr_int(max_charge)}</div></div>""", unsafe_allow_html=True)
+        st.markdown(f"""<div class="kpi-card"><div style="font-size:40px; margin-bottom:10px;">📈</div><div class="kpi-label">Highest Charge</div><div class="kpi-value">{fmt_inr_int(max_charge)}</div></div>""", unsafe_allow_html=True)
     with c4:
-        st.markdown(f"""<div class="kpi-card"><div class="kpi-label">% Smokers</div><div class="kpi-value">{smoker_pct:.1f}%</div></div>""", unsafe_allow_html=True)
+        st.markdown(f"""<div class="kpi-card"><div style="font-size:40px; margin-bottom:10px;">🚬</div><div class="kpi-label">% Smokers</div><div class="kpi-value">{smoker_pct:.1f}%</div></div>""", unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -350,7 +351,8 @@ if page == "🏠 Home / Overview":
         )
 
     with col_b:
-        st.markdown('<div class="section-header">🔑 Key Findings</div>', unsafe_allow_html=True)
+        st.markdown('<img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500" style="width:100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); object-fit: cover; margin-bottom: 1.5rem;" />', unsafe_allow_html=True)
+        st.markdown('<div class="section-header" style="margin-top:0;">🔑 Key Findings</div>', unsafe_allow_html=True)
         st.markdown(
             """
             <div class="insight-card">
@@ -365,12 +367,23 @@ if page == "🏠 Home / Overview":
             """,
             unsafe_allow_html=True,
         )
+        st.markdown('<img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=1200" style="width:100%; height:180px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 1rem;" />', unsafe_allow_html=True)
 
 # ===================================================================
 # PAGE 2 — EXPLORATORY DATA ANALYSIS
 # ===================================================================
 elif page == "📊 Exploratory Data Analysis":
-    st.markdown("# 📊 Exploratory Data Analysis")
+    st.markdown(
+        """
+        <div style="position:relative; width:100%; height:160px; margin-bottom:1.5rem; border-radius:12px; overflow:hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200" style="width:100%; height:100%; object-fit:cover;">
+            <div style="position:absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center;">
+                <h1 style="color:white !important; margin:0; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Exploratory Data Analysis</h1>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     st.markdown("Interactive visualizations to explore distributions, relationships, and patterns in the insurance dataset.")
 
     # Section A — Distributions
@@ -386,6 +399,8 @@ elif page == "📊 Exploratory Data Analysis":
     with r2c2:
         st.plotly_chart(charts.histogram(raw_df, 'charges', 'Charges Distribution'), use_container_width=True)
 
+    st.markdown('<div style="text-align:center; font-size:30px; margin: 1rem 0;">🔬</div>', unsafe_allow_html=True)
+
     # Section B — Categorical
     st.markdown('<div class="section-header">B — Categorical Distribution</div>', unsafe_allow_html=True)
     b1, b2, b3 = st.columns(3)
@@ -395,6 +410,8 @@ elif page == "📊 Exploratory Data Analysis":
         st.plotly_chart(charts.categorical_bar(raw_df, 'smoker', 'Smoker Distribution'), use_container_width=True)
     with b3:
         st.plotly_chart(charts.categorical_bar(raw_df, 'region', 'Region Distribution'), use_container_width=True)
+
+    st.markdown('<div style="text-align:center; font-size:30px; margin: 1rem 0;">🔬</div>', unsafe_allow_html=True)
 
     # Section C — Avg charges by category
     st.markdown('<div class="section-header">C — Average Charges by Category</div>', unsafe_allow_html=True)
@@ -406,6 +423,8 @@ elif page == "📊 Exploratory Data Analysis":
     with c3:
         st.plotly_chart(charts.avg_charge_bar(raw_df, 'region', 'Avg Charge by Region'), use_container_width=True)
 
+    st.markdown('<div style="text-align:center; font-size:30px; margin: 1rem 0;">🔬</div>', unsafe_allow_html=True)
+
     # Section D — Scatter plots
     st.markdown('<div class="section-header">D — Scatter Plots</div>', unsafe_allow_html=True)
     s1, s2, s3 = st.columns(3)
@@ -416,6 +435,8 @@ elif page == "📊 Exploratory Data Analysis":
     with s3:
         st.plotly_chart(charts.scatter_basic(raw_df, 'children', 'Children vs Charges'), use_container_width=True)
 
+    st.markdown('<div style="text-align:center; font-size:30px; margin: 1rem 0;">🔬</div>', unsafe_allow_html=True)
+
     # Section E — Box plot
     st.markdown('<div class="section-header">E — Box Plot Comparison</div>', unsafe_allow_html=True)
     st.plotly_chart(charts.box_smoker(raw_df), use_container_width=True)
@@ -424,7 +445,17 @@ elif page == "📊 Exploratory Data Analysis":
 # PAGE 3 — DATA INSIGHTS
 # ===================================================================
 elif page == "🔍 Data Insights":
-    st.markdown("# 🔍 Data Insights")
+    st.markdown(
+        """
+        <div style="position:relative; width:100%; height:160px; margin-bottom:1.5rem; border-radius:12px; overflow:hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200" style="width:100%; height:100%; object-fit:cover;">
+            <div style="position:absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center;">
+                <h1 style="color:white !important; margin:0; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">🔍 Data Insights</h1>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     st.markdown("Deep-dive analytics with storytelling visualizations and key statistical insights.")
 
     # 1. Correlation Heatmap
@@ -455,6 +486,7 @@ elif page == "🔍 Data Insights":
     with l3:
         st.plotly_chart(charts.bmi_category_bar(raw_df), use_container_width=True)
     with r3:
+        st.markdown('<img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400" style="width:100%; height:150px; object-fit:cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 1rem;" />', unsafe_allow_html=True)
         st.markdown('<div class="insight-card"><h4>⚖️ BMI Categories</h4>', unsafe_allow_html=True)
         st.markdown("""
         | Category | BMI Range |
@@ -474,6 +506,7 @@ elif page == "🔍 Data Insights":
 
     # 5. Top 10 highest-charge patients
     st.markdown('<div class="section-header">5 — Risk Score Summary: Top 10 Highest-Charge Patients</div>', unsafe_allow_html=True)
+    st.markdown('<img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=1200" style="width:100%; height:120px; object-fit:cover; border-radius:8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 1rem;" />', unsafe_allow_html=True)
     top10 = raw_df.nlargest(10, 'charges')[['age', 'bmi', 'smoker', 'region', 'charges']].reset_index(drop=True)
     top10.index = top10.index + 1
     top10['charges'] = top10['charges'].apply(lambda v: fmt_inr(v))
@@ -484,13 +517,26 @@ elif page == "🔍 Data Insights":
 # PAGE 4 — CHARGE PREDICTOR
 # ===================================================================
 elif page == "🤖 Charge Predictor":
-    st.markdown("# 🤖 Insurance Charge Predictor")
+    st.markdown(
+        """
+        <div style="display:flex; border-radius:12px; overflow:hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom:1.5rem; background: #1B5E40; height:160px;">
+            <div style="flex:1; display:flex; align-items:center; padding: 2rem;">
+                <h1 style="color:white !important; margin:0; font-size:2.2rem; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">AI-Powered<br>Insurance Charge Predictor</h1>
+            </div>
+            <div style="flex:1;">
+                <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?w=600" style="width:100%; height:100%; object-fit:cover; display:block;">
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     st.markdown("Enter patient details to get an instant prediction of medical insurance charges using our trained Linear Regression model.")
 
     left_col, right_col = st.columns([2, 3])
 
     with left_col:
         st.markdown('<div class="form-card"><h3>🩺 Enter Patient Details</h3>', unsafe_allow_html=True)
+        st.markdown('<img src="https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=400" style="width:100%; height:100px; object-fit:cover; border-radius:8px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />', unsafe_allow_html=True)
         age = st.slider("Age", 18, 80, 30, key="pred_age")
         sex = st.radio("Sex", ["Male", "Female"], horizontal=True, key="pred_sex")
         bmi = st.slider("BMI", 10.0, 55.0, 25.0, step=0.1, key="pred_bmi")
@@ -539,10 +585,13 @@ elif page == "🤖 Charge Predictor":
             # Risk label
             if prediction < 10000:
                 st.markdown('<div style="text-align:center"><span class="risk-low">🟢 Low Risk</span></div>', unsafe_allow_html=True)
+                st.markdown('<img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400" style="width:100%; height:150px; object-fit:cover; border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top:1rem;" />', unsafe_allow_html=True)
             elif prediction < 25000:
                 st.markdown('<div style="text-align:center"><span class="risk-medium">🟡 Medium Risk</span></div>', unsafe_allow_html=True)
+                st.markdown('<img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400" style="width:100%; height:150px; object-fit:cover; border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top:1rem;" />', unsafe_allow_html=True)
             else:
                 st.markdown('<div style="text-align:center"><span class="risk-high">🔴 High Risk</span></div>', unsafe_allow_html=True)
+                st.markdown('<img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400" style="width:100%; height:150px; object-fit:cover; border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top:1rem;" />', unsafe_allow_html=True)
 
             st.markdown("<br>", unsafe_allow_html=True)
 
@@ -583,7 +632,17 @@ elif page == "🤖 Charge Predictor":
 # PAGE 5 — DATASET VIEWER
 # ===================================================================
 elif page == "📋 Dataset Viewer":
-    st.markdown("# 📋 Dataset Viewer")
+    st.markdown(
+        """
+        <div style="position:relative; width:100%; height:140px; margin-bottom:1.5rem; border-radius:12px; overflow:hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=1200" style="width:100%; height:100%; object-fit:cover;">
+            <div style="position:absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center;">
+                <h1 style="color:white !important; margin:0; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">📋 Dataset Viewer</h1>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     st.markdown("Browse, filter, and download the raw hospital insurance dataset.")
 
     # Sidebar filters
